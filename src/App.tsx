@@ -11,7 +11,6 @@ import { BackToTop } from './components/BackToTop';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { PortfolioPage } from './pages/Portfolio';
-import { ProjectPage } from './pages/Project';
 import { ServicesPage } from './pages/Services';
 import { ServiceDetailPage } from './pages/ServiceDetail';
 import { Contact } from './pages/Contact';
@@ -67,7 +66,6 @@ function AnimatedRoutes() {
         <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
         <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
         <Route path="/portfolio" element={<PageWrapper><PortfolioPage /></PageWrapper>} />
-        <Route path="/portfolio/:slug" element={<PageWrapper><ProjectPage /></PageWrapper>} />
         <Route path="/services" element={<PageWrapper><ServicesPage /></PageWrapper>} />
         <Route path="/services/:slug" element={<PageWrapper><ServiceDetailPage /></PageWrapper>} />
         <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />

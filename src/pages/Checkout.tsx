@@ -1,13 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import { useStore } from "../context/StoreContext";
+import { useAdmin } from "../context/AdminContext";
 import { useNavigate, Link } from "react-router-dom";
 import { Check, ChevronLeft, CreditCard } from "lucide-react";
 import { motion } from "framer-motion";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 
 export function Checkout() {
-  const { cart, clearCart, addOrder } = useStore();
+  const { cart, clearCart } = useStore();
+  const { addOrder } = useAdmin();
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
   const [formData, setFormData] = useState({

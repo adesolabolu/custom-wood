@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useStore } from '../context/StoreContext';
+import { useAdmin } from '../context/AdminContext';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Search, Package, Truck, CheckCircle, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 
 export function OrderStatus() {
-  const { getOrder, orders } = useStore();
+  const { getOrder, orders } = useAdmin();
   const [searchParams, setSearchParams] = useSearchParams();
   const idFromQuery = searchParams.get('id') || '';
   

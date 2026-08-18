@@ -5,8 +5,8 @@ import { Breadcrumbs } from '../components/Breadcrumbs';
 
 const faqs = [
   {
-    question: "How long has Woodworking.Inc been in business?",
-    answer: "We have been handcrafting perfection since 1967. Over the decades, we've refined our techniques while staying true to our core values of quality and precision."
+    question: "What is the story behind Woodworking.Inc?",
+    answer: "We have been handcrafting bespoke woodwork with passion and precision for generations, continuously refining our techniques while staying true to our core values of quality, precision, and architectural elegance."
   },
   {
     question: "Do you offer custom designs?",
@@ -112,6 +112,50 @@ export function About() {
             <motion.p variants={fadeInUp} className="text-brand-light/80 text-lg leading-relaxed">
               Every piece of custom furniture begins its journey in our workshop. Here, master carpenters combine time-honored techniques with state-of-the-art tools to achieve unparalleled results. We source only the finest sustainable materials, ensuring each creation is not only beautiful but environmentally responsible.
             </motion.p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Workshop Video Tour Section */}
+      <section className="bg-brand-light py-20 lg:py-32">
+        <div className="px-6 md:px-12 lg:px-24 max-w-[1600px] mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <p className="uppercase tracking-widest text-sm font-bold flex items-center justify-center gap-4 before:content-['['] after:content-[']'] text-brand-dark mb-6">
+              A Glimpse Inside
+            </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-medium text-brand-dark">
+              WORKSHOP TOUR
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl relative bg-brand-dark"
+          >
+            <video
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster="https://res.cloudinary.com/drzh5dzha/image/upload/v1782662436/18365789-540d-4e5e-93c5-793402e2aff5.png"
+            >
+              <source
+                src="https://videos.pexels.com/video-files/3209211/3209211-uhd_2560_1440_25fps.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+            <div className="absolute inset-0 bg-brand-dark/10 pointer-events-none" />
           </motion.div>
         </div>
       </section>

@@ -7,43 +7,15 @@ interface CartItem {
   quantity: number;
 }
 
-export interface Order {
-  id: string;
-  items: CartItem[];
-  total: number;
-  status: 'Pending' | 'Processing' | 'In Production' | 'Shipped' | 'Delivered';
-  date: string;
-  contactInfo?: {
-    name: string;
-    email: string;
-    phone: string;
-  };
-  shippingAddress?: {
-    street: string;
-    city: string;
-    state: string;
-    zip: string;
-    country: string;
-  };
-  trackingCode?: string;
-  notes?: string;
-}
-
 interface StoreContextType {
   cart: CartItem[];
   wishlist: string[];
-  orders: Order[];
   addToCart: (product: Product) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
   toggleWishlist: (productId: string) => void;
   isInWishlist: (productId: string) => boolean;
-  addOrder: (order: Order) => void;
-  getOrder: (orderId: string) => Order | undefined;
-  updateOrderStatus: (orderId: string, status: Order['status']) => void;
-  updateOrderNote: (orderId: string, note: string) => void;
-  deleteOrder: (orderId: string) => void;
   cartAnimationTrigger: number;
 }
 
@@ -60,8 +32,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [orders, setOrders] = useState<Order[]>([]);
-
   const [cartAnimationTrigger, setCartAnimationTrigger] = useState(0);
 
   useEffect(() => {
@@ -71,17 +41,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     localStorage.setItem('woodwork_wishlist', JSON.stringify(wishlist));
   }, [wishlist]);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('woodwork_orders');
-    if (saved) {
-      setOrders(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('woodwork_orders', JSON.stringify(orders));
-  }, [orders]);
 
   const addToCart = (product: Product) => {
     setCart(prev => {
@@ -124,24 +83,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const isInWishlist = (productId: string) => wishlist.includes(productId);
 
-  const addOrder = async (order: Order) => setOrders(prev => [...prev, { ...order }]);
-  
-  const getOrder = (orderId: string) => orders.find(o => o.id === orderId);
-  
-  const updateOrderStatus = async (orderId: string, status: Order['status']) => {
-    setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status } : o));
-  };
-  
-  const updateOrderNote = async (orderId: string, notes: string) => {
-    setOrders(prev => prev.map(o => o.id === orderId ? { ...o, notes } : o));
-  };
-  
-  const deleteOrder = async (orderId: string) => setOrders(prev => prev.filter(o => o.id !== orderId));
-
   return (
     <StoreContext.Provider value={{
-      cart, wishlist, orders, addToCart, removeFromCart, updateQuantity, clearCart, 
-      toggleWishlist, isInWishlist, addOrder, getOrder, updateOrderStatus, updateOrderNote, deleteOrder, cartAnimationTrigger
+      cart, wishlist, addToCart, removeFromCart, updateQuantity, clearCart, 
+      toggleWishlist, isInWishlist, cartAnimationTrigger
     }}>
       {children}
     </StoreContext.Provider>

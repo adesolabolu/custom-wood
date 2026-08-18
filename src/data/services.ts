@@ -38,15 +38,5 @@ export const servicesList = [
     name: 'Millwork',
     slug: 'millwork',
     image: 'https://res.cloudinary.com/drzh5dzha/image/upload/v1782661459/2030d5fe-bc31-4fc3-9675-5c3b90e22b52.png'
-  },
-  {
-    name: 'CNC',
-    slug: 'cnc',
-    image: 'https://res.cloudinary.com/drzh5dzha/image/upload/v1782661289/ab2a9a8d-3ee2-4c38-a26f-12d782b1ae6b.png'
-  },
-  {
-    name: 'Commercial',
-    slug: 'commercial',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop'
   }
 ];

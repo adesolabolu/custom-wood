@@ -1,7 +1,6 @@
-import React from "react";
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Facebook, Linkedin } from "lucide-react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Facebook, Linkedin, Copy, Check } from "lucide-react";
 import { useAdmin } from "../context/AdminContext";
 import { useToast } from "../context/ToastContext";
 import { Breadcrumbs } from "../components/Breadcrumbs";
@@ -16,6 +15,14 @@ export function Contact() {
     email: "",
     message: "",
   });
+
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("info@woodworked.co");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -155,12 +162,44 @@ export function Contact() {
                     <h4 className="text-xs uppercase tracking-widest font-bold text-white/70 mb-2">
                       EMAIL
                     </h4>
-                    <a
-                      href="mailto:info@woodworked.co"
-                      className="text-white hover:text-brand-gold transition-colors font-medium text-base md:text-lg"
-                    >
-                      info@woodworked.co
-                    </a>
+                    <div className="flex items-center gap-3">
+                      <a
+                        href="mailto:info@woodworked.co"
+                        className="text-white hover:text-brand-gold transition-colors font-medium text-base md:text-lg"
+                      >
+                        info@woodworked.co
+                      </a>
+                      <button
+                        onClick={handleCopyEmail}
+                        className="flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-md p-2 transition-all"
+                        aria-label="Copy email address"
+                        title="Copy email address"
+                      >
+                        <AnimatePresence mode="wait">
+                          {copied ? (
+                            <motion.div
+                              key="check"
+                              initial={{ opacity: 0, scale: 0.5 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              exit={{ opacity: 0, scale: 0.5 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <Check size={16} className="text-green-400" />
+                            </motion.div>
+                          ) : (
+                            <motion.div
+                              key="copy"
+                              initial={{ opacity: 0, scale: 0.5 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              exit={{ opacity: 0, scale: 0.5 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <Copy size={16} />
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </button>
+                    </div>
                   </div>
 
                   <div>

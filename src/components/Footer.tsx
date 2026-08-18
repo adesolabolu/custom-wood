@@ -62,7 +62,7 @@ export function Footer() {
             <div className="flex flex-col gap-5">
               <h4 className="text-xs uppercase tracking-widest font-semibold text-white/50 mb-2">Services</h4>
               <div className="grid grid-cols-2 gap-x-8 gap-y-3">
-                {['Kitchens', 'Bathrooms', 'Cabinetry', 'Tables', 'Seating', 'Closets', 'Doors', 'Millwork', 'CNC', 'Commercial'].map(link => (
+                {['Kitchens', 'Bathrooms', 'Cabinetry', 'Tables', 'Seating', 'Closets', 'Doors', 'Millwork'].map(link => (
                   <Link key={link} to={`/services/${link.toLowerCase()}`} className="hover:text-brand-gold transition-colors font-medium text-sm">{link}</Link>
                 ))}
               </div>

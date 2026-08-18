@@ -162,8 +162,6 @@ export function Quote() {
                         <option value="closets">Closets</option>
                         <option value="doors">Doors</option>
                         <option value="millwork">Millwork</option>
-                        <option value="cnc">CNC</option>
-                        <option value="commercial">Commercial</option>
                         <option value="other">Other</option>
                       </select>
                       <ChevronDown

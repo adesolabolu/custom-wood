@@ -24,7 +24,7 @@ export function WhoWeAre() {
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-medium mb-8 leading-tight tracking-wide">
               <span className="text-brand-dark">HAND CRAFTING</span><br />
-              <span className="text-brand-brown">PERFECTION</span> <span className="text-brand-dark">SINCE 1967</span>
+              <span className="text-brand-brown">PERFECTION</span> <span className="text-brand-dark">IN EVERY DETAIL</span>
             </h2>
             <p className="text-2xl md:text-3xl font-heading mb-16 max-w-2xl leading-snug text-brand-dark font-medium">
               At Woodworking.Inc, we understand that the smallest details matter the most.

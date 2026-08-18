@@ -1,6 +1,10 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Product, products as staticProducts } from '../data/products';
-import { Project, projects as staticProjects, galleryImages as staticGalleries } from '../data/portfolio';
+import { galleryImages as staticGalleries } from '../data/portfolio';
+import { ContactMessage, contactMessages as staticContactMessages } from '../data/contactMessages';
+import { Newsletter, newsletters as staticNewsletters } from '../data/newsletters';
+import { QuoteRequest, quotes as staticQuotes } from '../data/quotes';
+import { Order, orders as staticOrders } from '../data/orders';
 import { CURRENT_TENANT_ID } from '../config/tenant';
 
 export interface GalleryItem {
@@ -8,51 +12,20 @@ export interface GalleryItem {
   category: string;
   title: string;
   src: string;
-}
-
-export interface Newsletter {
-  id: string;
-  email: string;
-  date: string;
-}
-
-export interface ContactMessage {
-  id: string;
-  name: string;
-  email: string;
-  phone?: string;
-  message: string;
-  date: string;
-}
-
-export interface QuoteRequest {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  type: string;
-  budget: string;
-  timeline: string;
-  details: string;
-  image?: string;
-  date: string;
+  tenantId?: string;
 }
 
 interface AdminContextType {
   products: Product[];
-  projects: Project[];
   galleries: GalleryItem[];
   newsletters: Newsletter[];
   contactMessages: ContactMessage[];
   quotes: QuoteRequest[];
+  orders: Order[];
   
   addProduct: (product: Product) => void;
   updateProduct: (product: Product) => void;
   deleteProduct: (id: string) => void;
-
-  addProject: (project: Project) => void;
-  updateProject: (project: Project) => void;
-  deleteProject: (id: string) => void;
 
   addGalleryItem: (item: GalleryItem) => void;
   updateGalleryItem: (item: GalleryItem) => void;
@@ -61,52 +34,58 @@ interface AdminContextType {
   addNewsletter: (email: string) => void;
   addContactMessage: (msg: Omit<ContactMessage, 'id' | 'date'>) => void;
   addQuoteRequest: (quote: Omit<QuoteRequest, 'id' | 'date'>) => void;
+  
+  addOrder: (order: Order) => void;
+  getOrder: (orderId: string) => Order | undefined;
+  updateOrderStatus: (orderId: string, status: Order['status']) => void;
+  updateOrderNote: (orderId: string, note: string) => void;
+  deleteOrder: (orderId: string) => void;
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
-export function AdminProvider({ children }: { children: ReactNode }) {
-  const [products, setProducts] = useState<Product[]>(staticProducts);
-  const [projects, setProjects] = useState<Project[]>(staticProjects);
-  const [galleries, setGalleries] = useState<GalleryItem[]>(staticGalleries);
-  const [newsletters, setNewsletters] = useState<Newsletter[]>([]);
-  const [contactMessages, setContactMessages] = useState<ContactMessage[]>([]);
-  const [quotes, setQuotes] = useState<QuoteRequest[]>([]);
+function useLocalStorageState<T>(key: string, initialValue: T): [T, React.Dispatch<React.SetStateAction<T>>] {
+  const [state, setState] = useState<T>(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      if (!item) return initialValue;
+      const parsed = JSON.parse(item);
+      if (Array.isArray(parsed) && Array.isArray(initialValue)) {
+        const existingIds = new Set(parsed.map((x: any) => x?.id).filter(Boolean));
+        const missing = (initialValue as any[]).filter((x: any) => x?.id && !existingIds.has(x.id));
+        if (missing.length > 0) {
+          return [...parsed, ...missing] as unknown as T;
+        }
+      }
+      return parsed;
+    } catch (error) {
+      console.warn(`Error reading localStorage key "${key}":`, error);
+      return initialValue;
+    }
+  });
 
   useEffect(() => {
-    const savedProducts = localStorage.getItem('woodwork_products');
-    if (savedProducts) setProducts(JSON.parse(savedProducts));
-    
-    const savedProjects = localStorage.getItem('woodwork_projects');
-    if (savedProjects) setProjects(JSON.parse(savedProjects));
-    
-    const savedGalleries = localStorage.getItem('woodwork_galleries');
-    if (savedGalleries) setGalleries(JSON.parse(savedGalleries));
-    
-    const savedNewsletters = localStorage.getItem('woodwork_newsletters');
-    if (savedNewsletters) setNewsletters(JSON.parse(savedNewsletters));
-    
-    const savedContactMessages = localStorage.getItem('woodwork_contactMessages');
-    if (savedContactMessages) setContactMessages(JSON.parse(savedContactMessages));
-    
-    const savedQuotes = localStorage.getItem('woodwork_quotes');
-    if (savedQuotes) setQuotes(JSON.parse(savedQuotes));
-  }, []);
+    try {
+      window.localStorage.setItem(key, JSON.stringify(state));
+    } catch (error) {
+      console.warn(`Error setting localStorage key "${key}":`, error);
+    }
+  }, [key, state]);
 
-  useEffect(() => { localStorage.setItem('woodwork_products', JSON.stringify(products)); }, [products]);
-  useEffect(() => { localStorage.setItem('woodwork_projects', JSON.stringify(projects)); }, [projects]);
-  useEffect(() => { localStorage.setItem('woodwork_galleries', JSON.stringify(galleries)); }, [galleries]);
-  useEffect(() => { localStorage.setItem('woodwork_newsletters', JSON.stringify(newsletters)); }, [newsletters]);
-  useEffect(() => { localStorage.setItem('woodwork_contactMessages', JSON.stringify(contactMessages)); }, [contactMessages]);
-  useEffect(() => { localStorage.setItem('woodwork_quotes', JSON.stringify(quotes)); }, [quotes]);
+  return [state, setState];
+}
+
+export function AdminProvider({ children }: { children: ReactNode }) {
+  const [products, setProducts] = useLocalStorageState<Product[]>('woodwork_products', staticProducts);
+  const [galleries, setGalleries] = useLocalStorageState<GalleryItem[]>('woodwork_galleries', staticGalleries);
+  const [newsletters, setNewsletters] = useLocalStorageState<Newsletter[]>('woodwork_newsletters', staticNewsletters);
+  const [contactMessages, setContactMessages] = useLocalStorageState<ContactMessage[]>('woodwork_contactMessages', staticContactMessages);
+  const [quotes, setQuotes] = useLocalStorageState<QuoteRequest[]>('woodwork_quotes', staticQuotes);
+  const [orders, setOrders] = useLocalStorageState<Order[]>('woodwork_orders', staticOrders);
 
   const addProduct = async (product: Product) => setProducts(prev => [...prev, product]);
   const updateProduct = async (product: Product) => setProducts(prev => prev.map(p => p.id === product.id ? product : p));
   const deleteProduct = async (id: string) => setProducts(prev => prev.filter(p => p.id !== id));
-
-  const addProject = async (project: Project) => setProjects(prev => [...prev, project]);
-  const updateProject = async (project: Project) => setProjects(prev => prev.map(p => p.id === project.id ? project : p));
-  const deleteProject = async (id: string) => setProjects(prev => prev.filter(p => p.id !== id));
 
   const addGalleryItem = async (item: GalleryItem) => setGalleries(prev => [...prev, item]);
   const updateGalleryItem = async (item: GalleryItem) => setGalleries(prev => prev.map(g => g.id === item.id ? item : g));
@@ -142,13 +121,27 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     setQuotes(prev => [...prev, newEntry as QuoteRequest]);
   };
 
+  const addOrder = async (order: Order) => setOrders(prev => [...prev, { ...order }]);
+  
+  const getOrder = (orderId: string) => orders.find(o => o.id === orderId);
+  
+  const updateOrderStatus = async (orderId: string, status: Order['status']) => {
+    setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status } : o));
+  };
+  
+  const updateOrderNote = async (orderId: string, notes: string) => {
+    setOrders(prev => prev.map(o => o.id === orderId ? { ...o, notes } : o));
+  };
+  
+  const deleteOrder = async (orderId: string) => setOrders(prev => prev.filter(o => o.id !== orderId));
+
   return (
     <AdminContext.Provider value={{
-      products, projects, galleries, newsletters, contactMessages, quotes,
+      products, galleries, newsletters, contactMessages, quotes, orders,
       addProduct, updateProduct, deleteProduct,
-      addProject, updateProject, deleteProject,
       addGalleryItem, updateGalleryItem, deleteGalleryItem,
-      addNewsletter, addContactMessage, addQuoteRequest
+      addNewsletter, addContactMessage, addQuoteRequest,
+      addOrder, getOrder, updateOrderStatus, updateOrderNote, deleteOrder
     }}>
       {children}
     </AdminContext.Provider>

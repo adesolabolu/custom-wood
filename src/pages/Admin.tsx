@@ -2,11 +2,8 @@ import React from "react";
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAdmin } from "../context/AdminContext";
-import { useStore } from "../context/StoreContext";
 import { useToast } from "../context/ToastContext";
 import { Product } from "../data/products";
-import { Project } from "../data/portfolio";
-import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { ActivityLog, logActivity, getActivityLogs } from "../lib/ActivityLogger";
 import { ImageUploadInput } from "../components/ui/ImageUploadInput";
 import { MigrationTool } from "../components/MigrationTool";
@@ -55,7 +52,6 @@ export function Admin() {
   const [isAdminMenuOpen, setIsAdminMenuOpen] = useState(false);
   const {
     products,
-    projects,
     galleries,
     newsletters,
     contactMessages,
@@ -63,14 +59,14 @@ export function Admin() {
     deleteProduct,
     addProduct,
     updateProduct,
-    deleteProject,
-    addProject,
-    updateProject,
     deleteGalleryItem,
     addGalleryItem,
     updateGalleryItem,
+    orders,
+    updateOrderStatus,
+    updateOrderNote,
+    deleteOrder,
   } = useAdmin();
-  const { orders, updateOrderStatus, updateOrderNote, deleteOrder } = useStore();
   const { showToast } = useToast();
 
   const handleStatusChange = (orderId: string, status: any) => {
@@ -81,9 +77,6 @@ export function Admin() {
 
   const [isProductModalOpen, setProductModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-
-  const [isProjectModalOpen, setProjectModalOpen] = useState(false);
-  const [editingProject, setEditingProject] = useState<Project | null>(null);
 
   const [isGalleryModalOpen, setGalleryModalOpen] = useState(false);
   const [editingGallery, setEditingGallery] = useState<any | null>(null);
@@ -155,32 +148,6 @@ export function Admin() {
     return activities.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 5);
   }, [orders, contactMessages, quotes, dashboardDateRange]);
 
-  const monthlyData = useMemo(() => {
-    const data: Record<string, { orders: number; inquiries: number }> = {
-      Jan: { orders: 0, inquiries: 0 }, Feb: { orders: 0, inquiries: 0 }, Mar: { orders: 0, inquiries: 0 },
-      Apr: { orders: 0, inquiries: 0 }, May: { orders: 0, inquiries: 0 }, Jun: { orders: 0, inquiries: 0 },
-      Jul: { orders: 0, inquiries: 0 }, Aug: { orders: 0, inquiries: 0 }, Sep: { orders: 0, inquiries: 0 },
-      Oct: { orders: 0, inquiries: 0 }, Nov: { orders: 0, inquiries: 0 }, Dec: { orders: 0, inquiries: 0 }
-    };
-
-    orders.filter(o => isDateInRange(o.date)).forEach(order => {
-      const month = new Date(order.date).toLocaleString('en-US', { month: 'short' });
-      if (data[month]) data[month].orders++;
-    });
-
-    quotes.filter(q => isDateInRange(q.date)).forEach(quote => {
-      const month = new Date(quote.date).toLocaleString('en-US', { month: 'short' });
-      if (data[month]) data[month].inquiries++;
-    });
-
-    contactMessages.filter(c => isDateInRange(c.date)).forEach(contact => {
-      const month = new Date(contact.date).toLocaleString('en-US', { month: 'short' });
-      if (data[month]) data[month].inquiries++;
-    });
-
-    return Object.keys(data).map(k => ({ name: k, orders: data[k].orders, inquiries: data[k].inquiries }));
-  }, [orders, quotes, contactMessages, dashboardDateRange]);
-
   const tabs = [
     { id: "overview", label: "Overview", icon: LayoutDashboard },
     { id: "portfolio", label: "Gallery", icon: ImageIcon },
@@ -246,40 +213,6 @@ export function Admin() {
     document.body.removeChild(link);
   };
 
-  const handleProjectSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const newProject: Project = {
-      id: editingProject
-        ? editingProject.id
-        : `proj${getMaxId(projects, 'proj') + 1}`,
-      slug: (formData.get("title") as string)
-        .toLowerCase()
-        .replace(/\s+/g, "-"),
-      category: formData.get("category") as string,
-      title: formData.get("title") as string,
-      shortDescription: formData.get("shortDescription") as string,
-      descriptions: (formData.get("descriptions") as string)
-        .split("\n")
-        .filter(Boolean),
-      coverImage:
-        (formData.get("coverImage") as string) ||
-        "https://via.placeholder.com/400",
-      images: [
-        formData.get("image1") as string,
-        formData.get("image2") as string,
-        formData.get("image3") as string,
-        formData.get("image4") as string
-      ].filter(Boolean) || [
-        (formData.get("coverImage") as string) ||
-          "https://via.placeholder.com/400",
-      ],
-    };
-    if (editingProject) updateProject(newProject);
-    else addProject(newProject);
-    setProjectModalOpen(false);
-  };
-
   const handleGallerySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -308,11 +241,6 @@ export function Admin() {
       case "overview":
         return (
           <div>
-            <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
-              <h3 className="text-lg font-bold text-yellow-800 mb-2">System Admin</h3>
-              <p className="text-sm text-yellow-700 mb-4">Use this tool to duplicate data from the template tenant to the current client tenant.</p>
-              <div className="w-48"><MigrationTool /></div>
-            </div>
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-900">
                 Dashboard Overview
@@ -421,22 +349,6 @@ export function Admin() {
                 <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl bg-indigo-50 text-indigo-500 flex items-center justify-center shrink-0">
                   <Package size={18} className="md:w-6 md:h-6" />
                 </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-black/5 mb-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-6">Store Sales & Project Inquiries</h3>
-              <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <ComposedChart data={monthlyData}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
-                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#6B7280' }} dy={10} />
-                    <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#6B7280' }} dx={-10} />
-                    <Tooltip cursor={{ fill: '#F3F4F6' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                    <Bar dataKey="orders" name="Store Sales" fill="#D3A971" radius={[4, 4, 0, 0]} />
-                    <Line type="monotone" dataKey="inquiries" name="Project Inquiries" stroke="#1A1A1A" strokeWidth={3} dot={{ r: 4, fill: '#1A1A1A' }} activeDot={{ r: 6 }} />
-                  </ComposedChart>
-                </ResponsiveContainer>
               </div>
             </div>
 
@@ -1363,8 +1275,6 @@ export function Admin() {
         <option value="Closets" />
         <option value="Doors" />
         <option value="Millwork" />
-        <option value="CNC" />
-        <option value="Commercial" />
       </datalist>
       <AnimatePresence>
         {isProductModalOpen && (
@@ -1460,106 +1370,7 @@ export function Admin() {
             </motion.div>
           </motion.div>
         )}
-
-        {isProjectModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-brand-dark/80 z-[100] flex items-center justify-center p-4"
-          >
-            <motion.div
-              initial={{ scale: 0.95 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.95 }}
-              className="bg-[#F4E6D5] rounded-lg shadow-xl w-full max-w-2xl overflow-hidden max-h-[90vh] flex flex-col"
-            >
-              <div className="flex justify-between items-center p-6 border-b border-brand-dark/10 shrink-0">
-                <h3 className="text-xl font-bold">
-                  {editingProject ? "Edit Project" : "Add Project"}
-                </h3>
-                <button onClick={() => setProjectModalOpen(false)}>
-                  <X size={20} />
-                </button>
-              </div>
-              <form
-                onSubmit={handleProjectSubmit}
-                className="p-6 flex flex-col gap-4 overflow-y-auto"
-              >
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase">Project Title</label>
-                    <input
-                      name="title"
-                      defaultValue={editingProject?.title || ""}
-                      placeholder="e.g. Modern Walnut Desk"
-                      required
-                      className="border border-black/10 p-3 rounded bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-brand-gold"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <label className="text-xs font-bold text-gray-500 uppercase">Category</label>
-                    <input
-                      name="category"
-                      list="category-options"
-                      defaultValue={editingProject?.category || "Kitchens"}
-                      required
-                      placeholder="Select or type category"
-                      className="border border-black/10 p-3 rounded bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-brand-gold"
-                    />
-                  </div>
-                </div>
-                <ImageInput
-                  name="coverImage"
-                  defaultValue={editingProject?.coverImage || ""}
-                  label="Cover Image"
-                  placeholder="https://images.unsplash.com/..."
-                />
-                <div className="flex flex-col gap-1">
-                  <label className="text-xs font-bold text-gray-500 uppercase">Short Description</label>
-                  <textarea
-                    name="shortDescription"
-                    defaultValue={
-                      editingProject?.shortDescription || ""
-                    }
-                    placeholder="Brief description of the project"
-                    required
-                    rows={2}
-                    className="border border-black/10 p-3 rounded resize-none bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-brand-gold"
-                  />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <label className="text-xs font-bold text-gray-500 uppercase">Long Descriptions (One paragraph per line)</label>
-                  <textarea
-                    name="descriptions"
-                    defaultValue={
-                      editingProject?.descriptions?.join("\n") || ""
-                    }
-                    placeholder="Enter detailed project description here..."
-                    required
-                    rows={4}
-                    className="border border-black/10 p-3 rounded resize-none text-sm leading-relaxed bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-brand-gold"
-                  />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <label className="text-xs font-bold text-gray-500 uppercase">Additional Images</label>
-                  <div className="grid grid-cols-2 gap-4">
-                    <ImageInput name="image1" defaultValue={editingProject?.images?.[0] || ""} placeholder="Image 1" />
-                    <ImageInput name="image2" defaultValue={editingProject?.images?.[1] || ""} placeholder="Image 2" />
-                    <ImageInput name="image3" defaultValue={editingProject?.images?.[2] || ""} placeholder="Image 3" />
-                    <ImageInput name="image4" defaultValue={editingProject?.images?.[3] || ""} placeholder="Image 4" />
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  className="bg-[#1A1A1A] hover:bg-[#D3A971] hover:text-[#1A1A1A] transition-colors text-white py-3 rounded mt-4 font-bold uppercase tracking-wider"
-                >
-                  Save Project
-                </button>
-              </form>
-            </motion.div>
-          </motion.div>
-        )}
+        
         {isGalleryModalOpen && (
           <motion.div
             initial={{ opacity: 0 }}

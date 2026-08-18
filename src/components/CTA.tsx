@@ -24,9 +24,13 @@ export function CTA() {
 
         <div className="relative z-20 flex flex-col lg:flex-row items-start lg:items-end justify-between w-full h-full">
           <div className="flex flex-col gap-6">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-              {['Kitchens', 'Bathrooms', 'Cabinetry', 'Tables', 'Seating', 'Closets', 'Doors', 'Millwork', 'CNC', 'Commercial'].map((tag) => (
-                <Link to={`/services/${tag.toLowerCase()}`} key={tag} className="border border-white/40 text-white px-4 py-1.5 rounded-sm text-xs tracking-wider uppercase font-medium backdrop-blur-sm text-center hover:bg-white/10 transition-colors">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 md:gap-3 w-full max-w-2xl">
+              {['Kitchens', 'Bathrooms', 'Cabinetry', 'Tables', 'Seating', 'Closets', 'Doors', 'Millwork'].map((tag) => (
+                <Link 
+                  to={`/services/${tag.toLowerCase()}`} 
+                  key={tag} 
+                  className="border border-white/40 text-white px-3 md:px-4 py-2 rounded-sm text-xs tracking-wider uppercase font-medium backdrop-blur-sm text-center hover:bg-white/10 transition-colors flex items-center justify-center whitespace-nowrap"
+                >
                   {tag}
                 </Link>
               ))}

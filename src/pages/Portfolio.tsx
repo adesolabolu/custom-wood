@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import { categories, projects } from "../data/portfolio";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { useAdmin } from "../context/AdminContext";
 import gsap from "gsap";
@@ -75,6 +74,7 @@ const MagneticGalleryItem: React.FC<{ img: any, index?: number }> = ({ img, inde
         ref={imgRef}
         src={img.src}
         alt={img.title}
+        referrerPolicy="no-referrer"
         className={`w-full relative object-cover block scale-110 origin-center ${isFirst ? 'h-full absolute inset-0' : 'h-auto'}`}
       />
       {/* Caption Overlay */}
@@ -156,96 +156,29 @@ export function PortfolioPage() {
             Woodworking, Joinery & Carpentry Projects
           </p>
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-heading font-medium leading-tight text-brand-dark mb-8">
-            OUR WORK
+            RECENT SHOP BUILDS
           </h1>
           <p className="text-brand-dark/80 text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto">
-            Browse some of our favorite projects. Rich, durable hardwood
-            flooring expertly installed, custom kitchens designed for optimal
-            organization, and bespoke furniture crafted to become cherished
-            heirlooms.
+            Browse some of our favorite recent shop builds and gallery items.
           </p>
         </motion.div>
       </section>
 
-      {/* 2. Main Projects Display Filter Grid - 2 Columns */}
-      <section
-        className="px-6 md:px-12 lg:px-24 py-12 lg:py-20 max-w-[1600px] mx-auto"
-        ref={containerRef}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-16 lg:gap-y-24">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, scale: 0.9, y: 50 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{
-                duration: 0.7,
-                delay: (index % 2) * 0.2,
-                ease: "easeOut",
-              }}
-              className="group flex flex-col"
-            >
-              <Link
-                to={`/portfolio/${project.slug}`}
-                className="block relative overflow-hidden rounded-2xl aspect-[4/3] mb-8 parallax-container"
-              >
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-[115%] absolute -top-[7.5%] left-0 object-cover transition-transform duration-1000 group-hover:scale-105 parallax-img"
-                />
-                <div className="absolute inset-0 bg-brand-dark/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </Link>
-
-              <div className="flex flex-col flex-grow">
-                <p className="uppercase tracking-widest text-xs font-bold mb-4 flex items-center gap-1 before:content-['['] after:content-[']'] text-brand-dark">
-                  {project.category}
-                </p>
-                <h3 className="text-3xl lg:text-4xl font-heading font-medium text-brand-dark mb-4 group-hover:text-brand-brown transition-colors">
-                  <Link to={`/portfolio/${project.slug}`}>{project.title}</Link>
-                </h3>
-                <p className="text-brand-dark/80 text-base leading-relaxed mb-8 flex-grow">
-                  {project.shortDescription}
-                </p>
-
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="self-start"
-                >
-                  <Link
-                    to={`/portfolio/${project.slug}`}
-                    className="inline-flex items-center gap-4 border border-brand-dark/20 px-8 py-4 uppercase text-xs font-bold tracking-widest btn-fill-dark transition-colors rounded-sm"
-                  >
-                    Learn More <ChevronRight size={16} />
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. Recent Shop Builds / Gallery Section */}
+      {/* 2. Recent Shop Builds / Gallery Section */}
       {galleries.length > 0 && (
-        <section className="bg-white py-20 lg:py-32">
+        <section className="bg-brand-light py-12 lg:py-24">
           <div className="px-6 md:px-12 lg:px-24 max-w-[1600px] mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-medium text-brand-dark mb-8">
-                RECENT SHOP BUILDS
-              </h2>
-
               {/* Filters */}
               <div className="flex flex-wrap justify-center gap-2 md:gap-4">
                 {dynamicCategories.map((category) => (
                   <button
                     key={category}
                     onClick={() => setActiveCategory(category)}
-                    className={`px-6 py-2 rounded-full text-sm font-semibold transition-colors ${
+                    className={`px-6 py-2 rounded-full text-sm font-semibold transition-colors border ${
                       activeCategory === category
-                        ? "bg-brand-dark text-brand-light"
-                        : "bg-brand-light text-brand-dark hover:bg-brand-gold/50"
+                        ? "bg-brand-dark border-brand-dark text-brand-light"
+                        : "bg-white border-transparent text-brand-dark hover:border-brand-dark/20"
                     }`}
                   >
                     {category}
@@ -269,7 +202,7 @@ export function PortfolioPage() {
         </section>
       )}
 
-      {/* 4. Action Call-To-Target Banner */}
+      {/* 3. Action Call-To-Target Banner */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img

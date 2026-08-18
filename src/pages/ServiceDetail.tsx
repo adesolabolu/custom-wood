@@ -184,50 +184,6 @@ const servicesData: Record<string, any> = {
     ],
     faqsImage: 'https://images.unsplash.com/photo-1622372738946-62e02505feb3?q=80&w=800&auto=format&fit=crop',
     ctaImage: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop'
-  },
-  cnc: {
-    heroImage: 'https://res.cloudinary.com/drzh5dzha/image/upload/v1782934451/woodwork-temp-db/cnc_hero_1782854971708.jpg',
-    heroSubtitle: 'Precision CNC routing',
-    heroTitle: 'CNC Services',
-    introSubtitle: 'Technology meets craftsmanship',
-    introTitle: 'Exact replication and complex geometries',
-    introText: 'We utilize advanced CNC technology to produce intricate patterns, precise components, and scalable production runs.',
-    introImage: 'https://res.cloudinary.com/drzh5dzha/image/upload/v1782934452/woodwork-temp-db/cnc_intro_1782854983262.jpg',
-    featuresSubtitle: 'CNC capabilities',
-    featuresTitle: 'Limitless design potential',
-    featuresImage: 'https://res.cloudinary.com/drzh5dzha/image/upload/v1782934450/woodwork-temp-db/cnc_features_1782854993328.jpg',
-    features: [
-      { id: '01', title: 'Routing', desc: 'Precise cutting of complex 2D and 3D shapes.' },
-      { id: '02', title: 'Engraving', desc: 'Detailed engraving for signage and decoration.' },
-      { id: '03', title: 'Prototyping', desc: 'Rapid prototyping for product development.' },
-      { id: '04', title: 'Production', desc: 'Consistent, high-volume part production.' },
-      { id: '05', title: 'Materials', desc: 'Working with wood, MDF, plastics, and more.' },
-      { id: '06', title: 'Design', desc: 'CAD/CAM design services to bring ideas to life.' }
-    ],
-    faqsImage: 'https://res.cloudinary.com/drzh5dzha/image/upload/v1782934449/woodwork-temp-db/cnc_faqs_1782855007630.jpg',
-    ctaImage: 'https://res.cloudinary.com/drzh5dzha/image/upload/v1782934447/woodwork-temp-db/cnc_cta_1782855021094.jpg'
-  },
-  commercial: {
-    heroImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop',
-    heroSubtitle: 'Commercial fit-outs and joinery',
-    heroTitle: 'Commercial',
-    introSubtitle: 'Impress your clients',
-    introTitle: 'Workspaces that inspire',
-    introText: 'We partner with architects and designers to deliver high-end commercial fit-outs for retail, hospitality, and corporate environments.',
-    introImage: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800&auto=format&fit=crop',
-    featuresSubtitle: 'Commercial services',
-    featuresTitle: 'Built for business',
-    featuresImage: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=800&auto=format&fit=crop',
-    features: [
-      { id: '01', title: 'Retail', desc: 'Custom display fixtures and point-of-sale counters.' },
-      { id: '02', title: 'Hospitality', desc: 'Bar fit-outs, restaurant seating, and reception desks.' },
-      { id: '03', title: 'Office', desc: 'Boardroom tables, workstations, and acoustic paneling.' },
-      { id: '04', title: 'Scale', desc: 'Capacity for large-scale, multi-site rollouts.' },
-      { id: '05', title: 'Compliance', desc: 'Adherence to commercial building codes and standards.' },
-      { id: '06', title: 'Project Mgt', desc: 'End-to-end project management for timely delivery.' }
-    ],
-    faqsImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop',
-    ctaImage: 'https://images.unsplash.com/photo-1497215848147-393f958f2d59?q=80&w=800&auto=format&fit=crop'
   }
 };
 
@@ -534,14 +490,14 @@ export function ServiceDetailPage() {
         </div>
         
         <div className="relative z-10 max-w-[1600px] mx-auto w-full flex flex-col items-center gap-16">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-            {['Kitchens', 'Bathrooms', 'Cabinetry', 'Tables', 'Seating', 'Closets', 'Doors', 'Millwork', 'CNC', 'Commercial'].map(s => {
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 mb-8 w-full max-w-3xl">
+            {['Kitchens', 'Bathrooms', 'Cabinetry', 'Tables', 'Seating', 'Closets', 'Doors', 'Millwork'].map(s => {
               const isActive = s.toLowerCase() === slug;
               return (
                 <Link 
                   key={s} 
                   to={`/services/${s.toLowerCase()}`}
-                  className={`border border-white/30 px-6 py-2 rounded-sm text-sm uppercase tracking-widest font-bold transition-colors text-center ${isActive ? 'bg-white text-brand-dark' : 'text-white hover:bg-white/10'}`}
+                  className={`border border-white/30 px-4 py-2.5 rounded-sm text-xs md:text-sm uppercase tracking-widest font-bold transition-colors text-center flex items-center justify-center whitespace-nowrap ${isActive ? 'bg-white text-brand-dark' : 'text-white hover:bg-white/10'}`}
                 >
                   {s}
                 </Link>
