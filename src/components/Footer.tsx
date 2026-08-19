@@ -85,7 +85,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-white/50 tracking-wider">
-          <p>© Copyright Woodworking.Inc 2026</p>
+          <p>© Copyright Woodworking.Inc</p>
         </div>
       </div>
     </footer>

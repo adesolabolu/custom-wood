@@ -1,10 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Product, products as staticProducts } from '../data/products';
 import { galleryImages as staticGalleries } from '../data/portfolio';
 import { ContactMessage, contactMessages as staticContactMessages } from '../data/contactMessages';
 import { Newsletter, newsletters as staticNewsletters } from '../data/newsletters';
 import { QuoteRequest, quotes as staticQuotes } from '../data/quotes';
-import { Order, orders as staticOrders } from '../data/orders';
 import { CURRENT_TENANT_ID } from '../config/tenant';
 
 export interface GalleryItem {
@@ -16,16 +14,10 @@ export interface GalleryItem {
 }
 
 interface AdminContextType {
-  products: Product[];
   galleries: GalleryItem[];
   newsletters: Newsletter[];
   contactMessages: ContactMessage[];
   quotes: QuoteRequest[];
-  orders: Order[];
-  
-  addProduct: (product: Product) => void;
-  updateProduct: (product: Product) => void;
-  deleteProduct: (id: string) => void;
 
   addGalleryItem: (item: GalleryItem) => void;
   updateGalleryItem: (item: GalleryItem) => void;
@@ -34,12 +26,6 @@ interface AdminContextType {
   addNewsletter: (email: string) => void;
   addContactMessage: (msg: Omit<ContactMessage, 'id' | 'date'>) => void;
   addQuoteRequest: (quote: Omit<QuoteRequest, 'id' | 'date'>) => void;
-  
-  addOrder: (order: Order) => void;
-  getOrder: (orderId: string) => Order | undefined;
-  updateOrderStatus: (orderId: string, status: Order['status']) => void;
-  updateOrderNote: (orderId: string, note: string) => void;
-  deleteOrder: (orderId: string) => void;
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
@@ -76,16 +62,10 @@ function useLocalStorageState<T>(key: string, initialValue: T): [T, React.Dispat
 }
 
 export function AdminProvider({ children }: { children: ReactNode }) {
-  const [products, setProducts] = useLocalStorageState<Product[]>('woodwork_products', staticProducts);
   const [galleries, setGalleries] = useLocalStorageState<GalleryItem[]>('woodwork_galleries', staticGalleries);
   const [newsletters, setNewsletters] = useLocalStorageState<Newsletter[]>('woodwork_newsletters', staticNewsletters);
   const [contactMessages, setContactMessages] = useLocalStorageState<ContactMessage[]>('woodwork_contactMessages', staticContactMessages);
   const [quotes, setQuotes] = useLocalStorageState<QuoteRequest[]>('woodwork_quotes', staticQuotes);
-  const [orders, setOrders] = useLocalStorageState<Order[]>('woodwork_orders', staticOrders);
-
-  const addProduct = async (product: Product) => setProducts(prev => [...prev, product]);
-  const updateProduct = async (product: Product) => setProducts(prev => prev.map(p => p.id === product.id ? product : p));
-  const deleteProduct = async (id: string) => setProducts(prev => prev.filter(p => p.id !== id));
 
   const addGalleryItem = async (item: GalleryItem) => setGalleries(prev => [...prev, item]);
   const updateGalleryItem = async (item: GalleryItem) => setGalleries(prev => prev.map(g => g.id === item.id ? item : g));
@@ -121,27 +101,11 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     setQuotes(prev => [...prev, newEntry as QuoteRequest]);
   };
 
-  const addOrder = async (order: Order) => setOrders(prev => [...prev, { ...order }]);
-  
-  const getOrder = (orderId: string) => orders.find(o => o.id === orderId);
-  
-  const updateOrderStatus = async (orderId: string, status: Order['status']) => {
-    setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status } : o));
-  };
-  
-  const updateOrderNote = async (orderId: string, notes: string) => {
-    setOrders(prev => prev.map(o => o.id === orderId ? { ...o, notes } : o));
-  };
-  
-  const deleteOrder = async (orderId: string) => setOrders(prev => prev.filter(o => o.id !== orderId));
-
   return (
     <AdminContext.Provider value={{
-      products, galleries, newsletters, contactMessages, quotes, orders,
-      addProduct, updateProduct, deleteProduct,
+      galleries, newsletters, contactMessages, quotes,
       addGalleryItem, updateGalleryItem, deleteGalleryItem,
-      addNewsletter, addContactMessage, addQuoteRequest,
-      addOrder, getOrder, updateOrderStatus, updateOrderNote, deleteOrder
+      addNewsletter, addContactMessage, addQuoteRequest
     }}>
       {children}
     </AdminContext.Provider>

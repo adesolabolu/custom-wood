@@ -15,12 +15,7 @@ import { ServicesPage } from './pages/Services';
 import { ServiceDetailPage } from './pages/ServiceDetail';
 import { Contact } from './pages/Contact';
 import { Quote } from './pages/Quote';
-import { Shop } from './pages/Shop';
-import { Cart } from './pages/Cart';
-import { Checkout } from './pages/Checkout';
-import { OrderStatus } from './pages/OrderStatus';
-import { Wishlist } from './pages/Wishlist';
-import { StoreProvider } from './context/StoreContext';
+import { Admin } from './pages/Admin';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,9 +30,9 @@ function ScrollToTop() {
 }
 
 const pageVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-  exit: { opacity: 0, y: -20, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.35, ease: "easeOut" } },
+  exit: { opacity: 0, transition: { duration: 0.2, ease: "easeIn" } }
 };
 
 function PageWrapper({ children }: { children: ReactNode }) {
@@ -70,11 +65,6 @@ function AnimatedRoutes() {
         <Route path="/services/:slug" element={<PageWrapper><ServiceDetailPage /></PageWrapper>} />
         <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
         <Route path="/quote" element={<PageWrapper><Quote /></PageWrapper>} />
-        <Route path="/shop" element={<PageWrapper><Shop /></PageWrapper>} />
-        <Route path="/cart" element={<PageWrapper><Cart /></PageWrapper>} />
-        <Route path="/checkout" element={<PageWrapper><Checkout /></PageWrapper>} />
-        <Route path="/order-status" element={<PageWrapper><OrderStatus /></PageWrapper>} />
-        <Route path="/wishlist" element={<PageWrapper><Wishlist /></PageWrapper>} />
         <Route path="/admin" element={<PageWrapper><Admin /></PageWrapper>} />
       </Routes>
     </AnimatePresence>
@@ -87,18 +77,20 @@ import { AdminProvider } from './context/AdminContext';
 
 import { SEO } from './components/SEO';
 import { Breadcrumbs } from './components/Breadcrumbs';
+import { FeedbackBar } from './components/FeedbackBar';
 
 function Layout() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
 
   return (
-    <div className="min-h-screen flex flex-col selection:bg-brand-gold selection:text-brand-dark overflow-x-hidden">
+    <div className="min-h-screen flex flex-col selection:bg-brand-gold selection:text-brand-dark overflow-x-hidden pb-16 sm:pb-12">
       <SEO />
       {!isAdmin && <Header />}
       <AnimatedRoutes />
       {!isAdmin && <Footer />}
       {!isAdmin && <BackToTop />}
+      <FeedbackBar />
     </div>
   );
 }
@@ -107,14 +99,12 @@ export default function App() {
   return (
     <HelmetProvider>
       <AdminProvider>
-        <StoreProvider>
-          <Router>
-            <ToastProvider>
-              <ScrollToTop />
-              <Layout />
-            </ToastProvider>
-          </Router>
-        </StoreProvider>
+        <Router>
+          <ToastProvider>
+            <ScrollToTop />
+            <Layout />
+          </ToastProvider>
+        </Router>
       </AdminProvider>
     </HelmetProvider>
   );
