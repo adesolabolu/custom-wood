@@ -281,6 +281,7 @@ export function Checkout() {
                 type="submit"
                 disabled={isProcessing}
                 className="w-full bg-brand-gold text-brand-dark py-4 font-bold uppercase tracking-wider text-sm rounded-sm hover:bg-white transition-colors relative overflow-hidden flex justify-center items-center h-14"
+                data-umami-event="custom-wood-multi-main - use-checkout"
               >
                 {isProcessing ? (
                   <motion.div

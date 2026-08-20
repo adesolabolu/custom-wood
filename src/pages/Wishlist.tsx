@@ -78,6 +78,7 @@ export function Wishlist() {
                   <button 
                     onClick={() => handleAddToCart(product)}
                     className="mt-auto w-full bg-brand-dark text-white py-3 font-bold uppercase tracking-wider text-xs rounded-sm hover:bg-brand-gold hover:text-brand-dark transition-colors flex justify-center items-center gap-2"
+                    data-umami-event="custom-wood-multi-main - add-to-cart"
                   >
                     <ShoppingCart size={16} /> Add to Cart
                   </button>

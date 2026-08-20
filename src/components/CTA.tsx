@@ -30,6 +30,7 @@ export function CTA() {
                   to={`/services/${tag.toLowerCase()}`} 
                   key={tag} 
                   className="border border-white/40 text-white px-3 md:px-4 py-2 rounded-sm text-xs tracking-wider uppercase font-medium backdrop-blur-sm text-center hover:bg-white/10 transition-colors flex items-center justify-center whitespace-nowrap"
+                  data-umami-event="custom-wood-multi-main - portfolio-view"
                 >
                   {tag}
                 </Link>
@@ -41,7 +42,7 @@ export function CTA() {
           </div>
 
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center mt-12 lg:mt-0 shrink-0">
-            <Link to="/quote" className="uppercase text-xs font-semibold tracking-wider border border-white/40 text-white px-6 py-4 btn-fill-white transition-colors flex items-center gap-2 h-[50px] backdrop-blur-sm rounded-sm">
+            <Link to="/quote" className="uppercase text-xs font-semibold tracking-wider border border-white/40 text-white px-6 py-4 btn-fill-white transition-colors flex items-center gap-2 h-[50px] backdrop-blur-sm rounded-sm" data-umami-event="custom-wood-multi-main - cta-click">
               Enquire now <ChevronRight size={16} />
             </Link>
           </motion.div>

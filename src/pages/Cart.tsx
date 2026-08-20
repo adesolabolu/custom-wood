@@ -107,6 +107,7 @@ export function Cart() {
                 <button 
                   onClick={() => navigate('/checkout')}
                   className="w-full bg-brand-gold text-brand-dark py-4 font-bold uppercase tracking-wider text-sm rounded-sm hover:bg-brand-dark hover:text-white transition-colors"
+                  data-umami-event="custom-wood-multi-main - use-checkout"
                 >
                   Proceed to Checkout
                 </button>

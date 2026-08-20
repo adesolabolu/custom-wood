@@ -55,7 +55,7 @@ export function ServicesPage() {
       <section className="px-4 md:px-8 lg:px-16 max-w-[1600px] mx-auto pb-16 lg:pb-32">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service, index) => (
-            <Link key={service.slug} to={`/services/${service.slug}`} className="block group">
+            <Link key={service.slug} to={`/services/${service.slug}`} className="block group" data-umami-event="custom-wood-multi-main - portfolio-view">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -144,6 +144,7 @@ export function ServicesPage() {
             <Link 
               to="/contact" 
               className="inline-flex items-center gap-4 bg-brand-light text-brand-dark px-10 py-5 font-bold uppercase tracking-wider btn-fill-dark transition-colors rounded-sm text-sm"
+              data-umami-event="custom-wood-multi-main - cta-click"
             >
               Inquire now <ChevronRight size={18} />
             </Link>

@@ -41,7 +41,7 @@ export function Footer() {
                   className="bg-[#EFE4CC] text-brand-dark px-4 py-3 w-full rounded-sm focus:outline-none placeholder:text-brand-dark/50"
                   required
                 />
-                <button type="submit" className="bg-brand-dark text-white px-6 py-3 text-sm font-semibold uppercase tracking-wider rounded-sm ml-2 hover:bg-brand-gold hover:text-brand-dark transition-colors shrink-0">
+                <button type="submit" className="bg-brand-dark text-white px-6 py-3 text-sm font-semibold uppercase tracking-wider rounded-sm ml-2 hover:bg-brand-gold hover:text-brand-dark transition-colors shrink-0" data-umami-event="custom-wood-multi-main - use-contact-form">
                   Sign up
                 </button>
               </div>

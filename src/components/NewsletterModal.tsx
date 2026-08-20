@@ -96,6 +96,7 @@ export function NewsletterModal() {
               <button
                 type="submit"
                 className="w-full bg-brand-dark text-brand-light py-3 font-bold uppercase tracking-wider text-sm hover:bg-brand-gold hover:text-brand-dark transition-colors rounded-sm"
+                data-umami-event="custom-wood-multi-main - use-contact-form"
               >
                 Subscribe Now
               </button>

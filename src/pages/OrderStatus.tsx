@@ -87,6 +87,7 @@ export function OrderStatus() {
           <button 
             onClick={() => handleSearch()}
             className="bg-brand-dark text-white px-6 py-3 rounded-md uppercase text-xs font-bold tracking-wider hover:bg-brand-gold hover:text-brand-dark transition-colors flex items-center gap-2"
+            data-umami-event="custom-wood-multi-main - cta-click"
           >
             <Search size={16} /> Track
           </button>

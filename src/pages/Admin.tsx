@@ -341,6 +341,7 @@ export function Admin() {
                   setGalleryModalOpen(true);
                 }}
                 className="bg-[#1A1A1A] text-white px-6 py-2.5 rounded-lg flex items-center gap-2 font-bold text-sm hover:bg-[#D3A971] hover:text-[#1A1A1A] transition-colors"
+                data-umami-event="custom-wood-multi-main - admin-project-mutation"
               >
                 <Plus size={16} /> Add Gallery Image
               </button>
@@ -358,6 +359,7 @@ export function Admin() {
                           setGalleryModalOpen(true);
                         }}
                         className="w-10 h-10 rounded-full bg-white text-gray-900 hover:bg-[#D3A971] flex items-center justify-center transition-colors"
+                        data-umami-event="custom-wood-multi-main - admin-project-mutation"
                       >
                         <Edit size={16} />
                       </button>
@@ -366,6 +368,7 @@ export function Admin() {
                           setGalleryToDelete(g);
                         }}
                         className="w-10 h-10 rounded-full bg-white text-red-600 hover:bg-red-50 flex items-center justify-center transition-colors"
+                        data-umami-event="custom-wood-multi-main - admin-project-mutation"
                       >
                         <Trash2 size={16} />
                       </button>
@@ -728,6 +731,7 @@ export function Admin() {
                     ? "bg-[#EFE4CC] text-[#1A1A1A]"
                     : "text-white/70 hover:bg-white/10 hover:text-white"
                 }`}
+                data-umami-event="custom-wood-multi-main - admin-tenant-switch"
               >
                 <Icon
                   size={18}
@@ -783,7 +787,108 @@ export function Admin() {
         <option value="Millwork" />
       </datalist>
       <AnimatePresence>
-        </AnimatePresence>
+        {isGalleryModalOpen && (
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6 overflow-hidden"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xl font-bold text-gray-900">
+                  {editingGallery ? "Edit Gallery Item" : "Add Gallery Item"}
+                </h3>
+                <button
+                  onClick={() => setGalleryModalOpen(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              <form onSubmit={handleGallerySubmit} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Title</label>
+                  <input
+                    type="text"
+                    name="title"
+                    defaultValue={editingGallery?.title || ""}
+                    required
+                    placeholder="Project Title"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#D3A971]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Category</label>
+                  <input
+                    type="text"
+                    name="category"
+                    list="category-options"
+                    defaultValue={editingGallery?.category || "Kitchens"}
+                    required
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[#D3A971]"
+                  />
+                </div>
+                <ImageInput
+                  name="src"
+                  defaultValue={editingGallery?.src || ""}
+                  label="Image"
+                />
+                <div className="flex justify-end gap-3 pt-4 border-t">
+                  <button
+                    type="button"
+                    onClick={() => setGalleryModalOpen(false)}
+                    className="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-gray-900"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-[#1A1A1A] text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-[#D3A971] hover:text-[#1A1A1A] transition-colors"
+                    data-umami-event="custom-wood-multi-main - admin-project-mutation"
+                  >
+                    {editingGallery ? "Save Changes" : "Create Item"}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+
+        {galleryToDelete && (
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 text-center"
+            >
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Delete Item</h3>
+              <p className="text-sm text-gray-500 mb-6">Are you sure you want to delete "{galleryToDelete.title}"?</p>
+              <div className="flex justify-center gap-3">
+                <button
+                  onClick={() => setGalleryToDelete(null)}
+                  className="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-gray-900"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    deleteGalleryItem(galleryToDelete.id);
+                    logActivity('Content Edit', 'Gallery Item Deleted', galleryToDelete.title);
+                    showToast("Gallery item deleted", "info");
+                    setGalleryToDelete(null);
+                  }}
+                  className="bg-red-600 text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-red-700 transition-colors"
+                  data-umami-event="custom-wood-multi-main - admin-project-mutation"
+                >
+                  Delete
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

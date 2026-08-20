@@ -123,6 +123,7 @@ export function Shop() {
                     whileTap={{ scale: 0.9 }}
                     onClick={() => handleQuickView(product)}
                     className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-dark shadow-lg hover:bg-brand-gold transition-colors"
+                    data-umami-event="custom-wood-multi-main - portfolio-view"
                   >
                     <Eye size={20} />
                   </motion.button>
@@ -131,6 +132,7 @@ export function Shop() {
                     whileTap={{ scale: 0.9 }}
                     onClick={() => handleAddToCart(product)}
                     className="w-12 h-12 bg-brand-dark rounded-full flex items-center justify-center text-white shadow-lg hover:bg-brand-gold hover:text-brand-dark transition-colors"
+                    data-umami-event="custom-wood-multi-main - add-to-cart"
                   >
                     <ShoppingCart size={20} />
                   </motion.button>
@@ -200,6 +202,7 @@ export function Shop() {
                       setQuickViewProduct(null);
                     }}
                     className="flex-1 bg-brand-dark text-brand-light py-4 font-bold uppercase tracking-wider text-sm rounded-sm hover:bg-brand-gold hover:text-brand-dark transition-colors"
+                    data-umami-event="custom-wood-multi-main - add-to-cart"
                   >
                     Add to Cart
                   </button>

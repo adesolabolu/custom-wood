@@ -100,6 +100,7 @@ export function Portfolio() {
             <div 
               key={idx} 
               className="w-[70vw] sm:w-[360px] md:w-[420px] lg:w-[480px] h-[48vh] md:h-[55vh] shrink-0 rounded-2xl md:rounded-3xl overflow-hidden relative group shadow-xl bg-brand-dark"
+              data-umami-event="custom-wood-multi-main - portfolio-view"
             >
               <img 
                 src={img.src} 

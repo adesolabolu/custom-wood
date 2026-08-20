@@ -74,6 +74,7 @@ const MagneticGalleryItem: React.FC<{ img: any, index?: number }> = ({ img, inde
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={`relative group rounded-xl overflow-hidden bg-gray-100 break-inside-avoid mb-4 md:mb-6 lg:mb-8 ${isFirst ? 'aspect-[3/4] lg:aspect-[2/3]' : ''}`}
+      data-umami-event="custom-wood-multi-main - portfolio-view"
     >
       <img
         ref={imgRef}
@@ -186,6 +187,7 @@ export function PortfolioPage() {
                         ? "bg-brand-dark border-brand-dark text-brand-light"
                         : "bg-white border-transparent text-brand-dark hover:border-brand-dark/20"
                     }`}
+                    data-umami-event="custom-wood-multi-main - portfolio-view"
                   >
                     {category}
                   </button>

@@ -238,6 +238,7 @@ export function Quote() {
                     <button
                       type="submit"
                       className="bg-[#D3A971] text-brand-dark btn-fill-white transition-colors px-10 py-4 font-bold uppercase tracking-widest text-xs rounded-sm w-full sm:w-auto"
+                      data-umami-event="custom-wood-multi-main - get-quote-form"
                     >
                       SUBMIT REQUEST
                     </button>

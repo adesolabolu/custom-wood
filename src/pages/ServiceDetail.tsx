@@ -319,6 +319,7 @@ export function ServiceDetailPage() {
               <Link 
                 to="/contact" 
                 className="inline-flex items-center gap-4 bg-brand-dark text-brand-light px-8 py-4 font-bold uppercase tracking-wider btn-fill-light transition-colors rounded-sm text-sm"
+                data-umami-event="custom-wood-multi-main - cta-click"
               >
                 Get a quote now <ChevronRight size={18} />
               </Link>
@@ -349,6 +350,7 @@ export function ServiceDetailPage() {
                 <Link 
                   to="/contact" 
                   className="inline-flex items-center gap-4 border border-brand-dark/20 text-brand-dark px-8 py-4 font-bold uppercase tracking-wider btn-fill-dark transition-colors rounded-sm text-sm"
+                  data-umami-event="custom-wood-multi-main - cta-click"
                 >
                   Get a quote now <ChevronRight size={18} />
                 </Link>
@@ -499,6 +501,7 @@ export function ServiceDetailPage() {
                   key={s} 
                   to={`/services/${s.toLowerCase()}`}
                   className={`border border-white/30 px-4 py-2.5 rounded-sm text-xs md:text-sm uppercase tracking-widest font-bold transition-colors text-center flex items-center justify-center whitespace-nowrap ${isActive ? 'bg-white text-brand-dark' : 'text-white hover:bg-white/10'}`}
+                  data-umami-event="custom-wood-multi-main - pricing-view"
                 >
                   {s}
                 </Link>
@@ -513,6 +516,7 @@ export function ServiceDetailPage() {
             <Link 
               to="/contact" 
               className="inline-flex items-center gap-4 border border-white text-white px-8 py-4 font-bold uppercase tracking-wider btn-fill-white transition-colors rounded-sm text-sm shrink-0"
+              data-umami-event="custom-wood-multi-main - cta-click"
             >
               Enquire Now <ChevronRight size={18} />
             </Link>

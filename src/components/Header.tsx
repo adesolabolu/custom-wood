@@ -33,16 +33,16 @@ export function Header() {
         </div>
 
         <nav className="hidden md:flex items-center gap-1 lg:gap-3 font-bold text-base">
-          <Link to="/" className={getLinkClass('/')}>Home</Link>
-          <Link to="/about" className={getLinkClass('/about')}>About</Link>
-          <Link to="/portfolio" className={getLinkClass('/portfolio')}>Portfolio</Link>
-          <Link to="/services" className={getLinkClass('/services')}>Services</Link>
-          <Link to="/contact" className={getLinkClass('/contact')}>Contact</Link>
+          <Link to="/" className={getLinkClass('/')} data-umami-event="custom-wood-multi-main - cta-click">Home</Link>
+          <Link to="/about" className={getLinkClass('/about')} data-umami-event="custom-wood-multi-main - cta-click">About</Link>
+          <Link to="/portfolio" className={getLinkClass('/portfolio')} data-umami-event="custom-wood-multi-main - cta-click">Portfolio</Link>
+          <Link to="/services" className={getLinkClass('/services')} data-umami-event="custom-wood-multi-main - cta-click">Services</Link>
+          <Link to="/contact" className={getLinkClass('/contact')} data-umami-event="custom-wood-multi-main - cta-click">Contact</Link>
         </nav>
 
         <div className="flex items-center gap-4 lg:gap-6">
           <div className="flex items-center gap-4 text-brand-dark mr-2">
-            <a href="tel:+001234209304" className="md:hidden hover:text-brand-gold transition-colors">
+            <a href="tel:+001234209304" className="md:hidden hover:text-brand-gold transition-colors" data-umami-event="custom-wood-multi-main - cta-click">
               <Phone size={20} />
             </a>
             <a href="#" className="md:hidden hover:text-brand-gold transition-colors">
@@ -53,11 +53,11 @@ export function Header() {
           <div className="hidden lg:flex items-center gap-5 text-brand-dark">
             <a href="#" className="hover:text-brand-dark transition-colors"><Facebook size={20} /></a>
             <a href="#" className="hover:text-brand-dark transition-colors"><Instagram size={20} /></a>
-            <a href="#" className="hover:text-brand-dark transition-colors"><Phone size={20} /></a>
+            <a href="tel:+001234209304" className="hover:text-brand-dark transition-colors" data-umami-event="custom-wood-multi-main - cta-click"><Phone size={20} /></a>
           </div>
           
           <div className="hidden md:flex items-center ml-2">
-            <Link to="/quote" className="uppercase text-xs font-bold tracking-widest border border-brand-dark/20 px-6 py-3 btn-fill-dark transition-colors flex items-center gap-2 h-[46px] rounded-sm">
+            <Link to="/quote" className="uppercase text-xs font-bold tracking-widest border border-brand-dark/20 px-6 py-3 btn-fill-dark transition-colors flex items-center gap-2 h-[46px] rounded-sm" data-umami-event="custom-wood-multi-main - cta-click">
               Get a Quote <ChevronRight size={16} />
             </Link>
           </div>
