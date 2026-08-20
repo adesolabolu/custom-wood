@@ -14,7 +14,7 @@ const MagneticGalleryItem: React.FC<{ img: any, index?: number }> = ({ img, inde
   useEffect(() => {
     if (!containerRef.current) return;
 
-    gsap.fromTo(
+    const anim = gsap.fromTo(
       containerRef.current,
       { opacity: 0, y: 30, scale: 0.95 },
       {
@@ -30,6 +30,11 @@ const MagneticGalleryItem: React.FC<{ img: any, index?: number }> = ({ img, inde
         },
       },
     );
+
+    return () => {
+      anim.kill();
+      anim.scrollTrigger?.kill();
+    };
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -96,6 +101,7 @@ export function PortfolioPage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!containerRef.current) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -127,7 +133,7 @@ export function PortfolioPage() {
           },
         });
       });
-    }, containerRef);
+    }, containerRef.current);
 
     return () => ctx.revert();
   }, [activeCategory]);
@@ -140,7 +146,7 @@ export function PortfolioPage() {
       : galleries.filter((img) => img.category === activeCategory);
 
   return (
-    <div className="pt-24 lg:pt-32 bg-brand-light min-h-screen">
+    <div className="pt-24 lg:pt-32 bg-brand-light min-h-screen" ref={containerRef}>
       {/* 1. Portfolio Intro / Hero Section */}
       <section className="px-6 md:px-12 lg:px-24 py-16 lg:py-24 max-w-[1600px] mx-auto text-center relative">
         <div className="text-left mb-12">

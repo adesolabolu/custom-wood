@@ -22,9 +22,11 @@ export function Portfolio() {
   }, [galleries]);
 
   useEffect(() => {
+    let ctx: gsap.Context | null = null;
     // Timeout to ensure DOM and images have rendered dimensions
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+      if (!sectionRef.current || !containerRef.current) return;
+      ctx = gsap.context(() => {
         if (!sectionRef.current || !containerRef.current) return;
 
         const getScrollAmount = () => {
@@ -56,12 +58,13 @@ export function Portfolio() {
             }
           }
         });
-      }, sectionRef);
-
-      return () => ctx.revert();
+      }, sectionRef.current);
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      ctx?.revert();
+    };
   }, [displayImages]);
 
   return (

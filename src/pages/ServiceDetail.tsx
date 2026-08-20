@@ -222,6 +222,7 @@ export function ServiceDetailPage() {
 
   // GSAP Parallax setup for hero
   useEffect(() => {
+    if (!containerRef.current) return;
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
@@ -251,7 +252,7 @@ export function ServiceDetailPage() {
           }
         });
       });
-    }, containerRef);
+    }, containerRef.current);
 
     return () => ctx.revert();
   }, [slug]);

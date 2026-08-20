@@ -49,8 +49,6 @@ function PageWrapper({ children }: { children: ReactNode }) {
   );
 }
 
-import { Admin } from './pages/Admin';
-
 function AnimatedRoutes() {
   const location = useLocation();
   

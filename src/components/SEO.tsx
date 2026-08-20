@@ -9,7 +9,7 @@ interface SEOProps {
 }
 
 export function SEO({
-  title = "Oak & Iron - Custom Woodcraft & Metalwork",
+  title = "Woodworking.Inc",
   description = "Crafting timeless custom furniture and architectural elements with premium wood and metal.",
   keywords = "woodworking, custom furniture, metalwork, bespoke furniture, handcrafted",
   image = "/og-image.jpg",

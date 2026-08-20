@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
@@ -12,7 +12,10 @@ import { CTA } from '../components/CTA';
 gsap.registerPlugin(ScrollTrigger);
 
 export function Home() {
+  const mainRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
+    if (!mainRef.current) return;
     const ctx = gsap.context(() => {
       gsap.utils.toArray('.parallax-bg').forEach((bg: any) => {
         gsap.to(bg, {
@@ -26,13 +29,13 @@ export function Home() {
           }
         });
       });
-    });
+    }, mainRef.current);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <main className="flex-grow">
+    <main ref={mainRef} className="flex-grow">
       <Hero />
       <WhoWeAre />
       <Services />

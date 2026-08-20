@@ -147,11 +147,10 @@ export function About() {
               muted
               loop
               playsInline
-              poster="https://res.cloudinary.com/drzh5dzha/image/upload/v1782662436/18365789-540d-4e5e-93c5-793402e2aff5.png"
             >
               <source
-                src="https://videos.pexels.com/video-files/3209211/3209211-uhd_2560_1440_25fps.mp4"
-                type="video/mp4"
+                src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Video_of_making_of_log_furniture_cutting_a_bar_stool_from_a_log.webm"
+                type="video/webm"
               />
               Your browser does not support the video tag.
             </video>
@@ -274,52 +273,6 @@ export function About() {
             </motion.div>
           ))}
         </div>
-      </section>
-
-      {/* 5. Team Showcase Profile Block */}
-      <section className="pt-8 lg:pt-16 pb-16 lg:pb-32 px-6 md:px-12 lg:px-24 max-w-[1600px] mx-auto bg-brand-light">
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
-          className="text-center max-w-3xl mx-auto mb-20"
-        >
-          <p className="uppercase tracking-widest text-sm font-bold flex items-center justify-center gap-4 before:content-['['] after:content-[']'] text-brand-dark mb-10">
-            Meet the Team
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-medium text-brand-dark">
-            THE FACES BEHIND THE MAGIC
-          </h2>
-        </motion.div>
-
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 lg:gap-16 justify-items-center"
-        >
-          {[
-            { name: 'Alistair Vance', role: 'Master Carpenter', img: 'https://i.pinimg.com/1200x/b5/8e/74/b58e74582a0274d64f9a9d8fab8b8a28.jpg' },
-            { name: 'Marcus Brody', role: 'Lead Designer', img: 'https://i.pinimg.com/1200x/b5/8e/74/b58e74582a0274d64f9a9d8fab8b8a28.jpg' },
-            { name: 'Elena Rostova', role: 'Finishing Specialist', img: 'https://i.pinimg.com/1200x/c0/92/01/c092013329f6f6fcd43cd0fafae95109.jpg' }
-          ].map((member, i) => (
-            <motion.div 
-              key={member.name}
-              variants={fadeInUp}
-              whileHover={{ y: -10 }}
-              className="group cursor-pointer flex flex-col items-center text-center w-full max-w-xs"
-            >
-              <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-6 border-4 border-white shadow-xl relative">
-                <div className="absolute inset-0 bg-brand-dark/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
-                <img src={member.img} alt={member.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              </div>
-              <h3 className="text-2xl font-heading font-medium text-brand-dark mb-2">{member.name}</h3>
-              <p className="text-brand-brown font-semibold tracking-wider text-sm uppercase">{member.role}</p>
-            </motion.div>
-          ))}
-        </motion.div>
       </section>
 
       {/* 6. Action Call-To-Target Banner */}
