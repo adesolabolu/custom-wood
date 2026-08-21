@@ -285,7 +285,7 @@ export function ServiceDetailPage() {
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="relative z-10 text-brand-light px-6"
         >
           <div className="uppercase tracking-widest text-xs font-bold mb-6 before:content-['['] after:content-[']']">
@@ -304,7 +304,7 @@ export function ServiceDetailPage() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.4 }}
           >
             <div className="uppercase tracking-widest text-xs font-bold mb-6 before:content-['['] after:content-[']'] text-brand-dark/70">
               {data.introSubtitle}
@@ -365,7 +365,7 @@ export function ServiceDetailPage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
                   <div className="uppercase tracking-widest text-xs font-bold before:content-['['] after:content-[']'] text-brand-dark/60">
                     {feature.id}
@@ -456,7 +456,7 @@ export function ServiceDetailPage() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    transition={{ duration: 0.3, delay: i * 0.1 }}
                   >
                     <div className="rounded-2xl overflow-hidden mb-6 aspect-[4/3]">
                       <img 

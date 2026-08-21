@@ -80,7 +80,7 @@ export function Values() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
             >
               <div className="w-14 h-14 bg-brand-accent rounded-md flex items-center justify-center mb-6">
                 <img src={value.icon} alt={value.title} className="w-7 h-7" />

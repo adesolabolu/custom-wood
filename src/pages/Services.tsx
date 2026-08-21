@@ -38,7 +38,7 @@ export function ServicesPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
         >
           <p className="uppercase tracking-widest text-sm font-bold flex items-center justify-center gap-1 before:content-['['] after:content-[']'] mb-8 text-brand-dark">
             EXPLORE OUR OFFERINGS
@@ -60,7 +60,7 @@ export function ServicesPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
                 className="relative h-[400px] rounded-xl overflow-hidden bg-brand-dark/10"
               >
                 <img 

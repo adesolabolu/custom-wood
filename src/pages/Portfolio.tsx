@@ -156,7 +156,7 @@ export function PortfolioPage() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="relative z-10"
         >
           <p className="uppercase tracking-widest text-sm font-bold mb-6 flex items-center justify-center gap-1 before:content-['['] after:content-[']']">

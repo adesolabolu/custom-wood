@@ -13,7 +13,7 @@ export function Hero() {
         <motion.img 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           src="https://res.cloudinary.com/drzh5dzha/image/upload/v1782582323/577439c2-e0fa-4b46-9e33-0f0d0e28eaaf.png" 
           alt="Craftsman working with wood" 
           className="w-full h-full object-cover"

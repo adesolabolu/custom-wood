@@ -106,7 +106,7 @@ export function Shop() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
               className="group flex flex-col"
             >
               <div className="relative aspect-[4/5] bg-gray-100 rounded-2xl overflow-hidden mb-6">

@@ -24,7 +24,7 @@ const faqs = [
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
 };
 
 const staggerContainer = {
@@ -32,7 +32,7 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2
+      staggerChildren: 0.1
     }
   }
 };
@@ -57,7 +57,7 @@ export function About() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "50px" }}
             variants={staggerContainer}
           >
             <motion.p variants={fadeInUp} className="uppercase tracking-widest text-sm font-bold flex items-center gap-4 before:content-['['] after:content-[']'] mb-10">
@@ -75,7 +75,7 @@ export function About() {
               style={{ y: heroY, scale: 1.1 }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1.2 }}
+              transition={{ duration: 0.6 }}
               src="https://res.cloudinary.com/drzh5dzha/image/upload/v1782491501/woodwork_template/66968f6bacdd554c9b6decad_pexels-heyho-6758534.webp" 
               alt="About our workshop" 
               className="w-full h-full object-cover origin-center"
@@ -99,7 +99,7 @@ export function About() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "50px" }}
             variants={staggerContainer}
             className="order-1 lg:order-2"
           >
@@ -122,7 +122,7 @@ export function About() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "50px" }}
             variants={fadeInUp}
             className="text-center max-w-3xl mx-auto mb-16"
           >
@@ -137,8 +137,8 @@ export function About() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "50px" }}
+            transition={{ duration: 0.4 }}
             className="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl relative bg-brand-dark"
           >
             <video
@@ -164,7 +164,7 @@ export function About() {
         <motion.div 
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "50px" }}
           variants={fadeInUp}
           className="text-center max-w-3xl mx-auto mb-16"
         >
@@ -179,7 +179,7 @@ export function About() {
         <motion.div 
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "50px" }}
           variants={staggerContainer}
           className="relative"
         >
@@ -201,7 +201,7 @@ export function About() {
                 {/* Step Circle */}
                 <motion.div 
                   whileHover={{ scale: 1.1, rotate: 180 }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="w-24 h-24 rounded-full bg-brand-light border-4 border-white shadow-xl flex items-center justify-center mb-8 relative z-10 overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-brand-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -226,7 +226,7 @@ export function About() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "50px" }}
           variants={fadeInUp}
           className="text-center mb-16"
         >
@@ -280,7 +280,7 @@ export function About() {
         <motion.div 
           initial={{ scale: 1.1 }}
           whileInView={{ scale: 1 }}
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 0.8 }}
           className="absolute inset-0 z-0"
         >
           <img 

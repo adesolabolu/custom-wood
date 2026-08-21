@@ -23,7 +23,7 @@ export function Header() {
       <motion.header 
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-4 left-4 right-4 z-50 bg-brand-light border border-brand-dark/20 rounded-2xl shadow-sm px-4 md:px-8 py-3 md:py-4 flex items-center justify-between"
       >
         <div className="flex items-center gap-2">

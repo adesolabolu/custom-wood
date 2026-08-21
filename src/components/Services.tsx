@@ -35,8 +35,8 @@ export function Services() {
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true, margin: "50px" }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
               className="absolute inset-0 w-full h-full"
             >
               <div className="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-500 z-10" />
