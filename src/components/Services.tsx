@@ -52,8 +52,8 @@ export function Services() {
                 </div>
               </div>
 
-              <div className="absolute bottom-8 left-6 z-20">
-                <h3 className="text-white text-2xl font-heading font-medium tracking-wide whitespace-nowrap">
+              <div className="absolute bottom-6 left-6 right-6 z-20">
+                <h3 className="text-white text-xl md:text-2xl font-heading font-medium tracking-wide leading-tight">
                   {service.name}
                 </h3>
               </div>
