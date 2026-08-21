@@ -38,14 +38,14 @@ export function Hero() {
             We specialize in creating custom woodwork that combines precision craftsmanship with timeless design, transforming your spaces into works of art.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
-              <Link to="/quote" className="block w-full sm:w-auto text-center bg-brand-gold text-brand-dark px-8 md:px-10 py-4 font-semibold uppercase tracking-wider text-sm btn-fill-white transition-colors duration-300 rounded-sm whitespace-nowrap min-w-[200px]" data-umami-event="custom-wood-multi-main - cta-click">
+              <Link to="/quote" className="inline-flex items-center justify-center w-full sm:w-[210px] h-[52px] text-center bg-brand-gold text-brand-dark px-4 font-semibold uppercase tracking-wider text-xs md:text-sm btn-fill-white transition-colors duration-300 rounded-sm whitespace-nowrap" data-umami-event="custom-wood-multi-main - cta-click">
                 Get a Free Quote
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
-              <Link to="/services" className="block w-full sm:w-auto text-center border border-brand-light/30 text-brand-light px-8 py-4 font-semibold uppercase tracking-wider text-sm btn-fill-light transition-colors duration-300 rounded-sm" data-umami-event="custom-wood-multi-main - cta-click">
+              <Link to="/services" className="inline-flex items-center justify-center w-full sm:w-[210px] h-[52px] text-center border border-brand-light/30 text-brand-light px-4 font-semibold uppercase tracking-wider text-xs md:text-sm btn-fill-light transition-colors duration-300 rounded-sm whitespace-nowrap" data-umami-event="custom-wood-multi-main - cta-click">
                 View Services
               </Link>
             </motion.div>
