@@ -81,7 +81,7 @@ export function Quote() {
         </div>
         <div className="relative z-10 text-brand-dark px-6 w-full">
           <div className="uppercase tracking-widest text-xs font-bold mb-8 flex items-center justify-center gap-4 before:content-['['] after:content-[']']">
-            GET A QUOTE
+            GET A FREE QUOTE
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight uppercase max-w-3xl mx-auto">
             Request an Estimate

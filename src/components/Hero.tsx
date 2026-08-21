@@ -40,8 +40,8 @@ export function Hero() {
           
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
-              <Link to="/quote" className="block w-full sm:w-auto text-center bg-brand-gold text-brand-dark px-8 py-4 font-semibold uppercase tracking-wider text-sm btn-fill-white transition-colors duration-300 rounded-sm" data-umami-event="custom-wood-multi-main - cta-click">
-                Request a quote
+              <Link to="/quote" className="block w-full sm:w-auto text-center bg-brand-gold text-brand-dark px-8 md:px-10 py-4 font-semibold uppercase tracking-wider text-sm btn-fill-white transition-colors duration-300 rounded-sm whitespace-nowrap min-w-[200px]" data-umami-event="custom-wood-multi-main - cta-click">
+                Get a Free Quote
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">

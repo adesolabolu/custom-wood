@@ -302,9 +302,9 @@ export function About() {
             READY TO START YOUR PROJECT?
           </motion.h2>
           <motion.div variants={fadeInUp}>
-            <a href="/quote" className="inline-flex items-center gap-4 bg-brand-gold text-brand-dark px-10 py-5 font-bold uppercase tracking-wider btn-fill-white transition-colors rounded-sm text-sm hover:scale-105 active:scale-95 duration-200">
-              Get a Quote <ChevronRight size={18} />
-            </a>
+            <Link to="/quote" className="inline-flex items-center justify-center gap-4 bg-brand-gold text-brand-dark px-10 md:px-12 py-5 font-bold uppercase tracking-wider btn-fill-white transition-colors rounded-sm text-sm hover:scale-105 active:scale-95 duration-200 whitespace-nowrap min-w-[240px]">
+              Get a Free Quote <ChevronRight size={18} />
+            </Link>
           </motion.div>
         </motion.div>
       </section>

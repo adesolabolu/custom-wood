@@ -57,8 +57,8 @@ export function Header() {
           </div>
           
           <div className="hidden md:flex items-center ml-2">
-            <Link to="/quote" className="uppercase text-xs font-bold tracking-widest border border-brand-dark/20 px-6 py-3 btn-fill-dark transition-colors flex items-center gap-2 h-[46px] rounded-sm" data-umami-event="custom-wood-multi-main - cta-click">
-              Get a Quote <ChevronRight size={16} />
+            <Link to="/quote" className="uppercase text-xs font-bold tracking-widest border border-brand-dark/20 px-7 py-3 btn-fill-dark transition-colors flex items-center gap-2 h-[46px] rounded-sm whitespace-nowrap" data-umami-event="custom-wood-multi-main - cta-click">
+              Get a Free Quote <ChevronRight size={16} />
             </Link>
           </div>
 
@@ -86,7 +86,7 @@ export function Header() {
               <Link to="/portfolio" onClick={() => setIsMobileMenuOpen(false)} className={getMobileLinkClass('/portfolio')}>Portfolio</Link>
               <Link to="/services" onClick={() => setIsMobileMenuOpen(false)} className={getMobileLinkClass('/services')}>Services</Link>
               <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className={getMobileLinkClass('/contact')}>Contact Us</Link>
-              <Link to="/quote" onClick={() => setIsMobileMenuOpen(false)} className={getMobileLinkClass('/quote')}>Get a Quote</Link>
+              <Link to="/quote" onClick={() => setIsMobileMenuOpen(false)} className={getMobileLinkClass('/quote')}>Get a Free Quote</Link>
             </nav>
 
             <div className="mt-auto flex items-center gap-8 text-brand-dark">

@@ -317,11 +317,11 @@ export function ServiceDetailPage() {
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
               <Link 
-                to="/contact" 
-                className="inline-flex items-center gap-4 bg-brand-dark text-brand-light px-8 py-4 font-bold uppercase tracking-wider btn-fill-light transition-colors rounded-sm text-sm"
+                to="/quote" 
+                className="inline-flex items-center justify-center gap-4 bg-brand-dark text-brand-light px-8 md:px-10 py-4 font-bold uppercase tracking-wider btn-fill-light transition-colors rounded-sm text-sm whitespace-nowrap min-w-[220px]"
                 data-umami-event="custom-wood-multi-main - cta-click"
               >
-                Get a quote now <ChevronRight size={18} />
+                Get a free quote now <ChevronRight size={18} />
               </Link>
             </motion.div>
           </motion.div>
@@ -348,11 +348,11 @@ export function ServiceDetailPage() {
               </h2>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
                 <Link 
-                  to="/contact" 
-                  className="inline-flex items-center gap-4 border border-brand-dark/20 text-brand-dark px-8 py-4 font-bold uppercase tracking-wider btn-fill-dark transition-colors rounded-sm text-sm"
+                  to="/quote" 
+                  className="inline-flex items-center justify-center gap-4 border border-brand-dark/20 text-brand-dark px-8 md:px-10 py-4 font-bold uppercase tracking-wider btn-fill-dark transition-colors rounded-sm text-sm whitespace-nowrap min-w-[220px]"
                   data-umami-event="custom-wood-multi-main - cta-click"
                 >
-                  Get a quote now <ChevronRight size={18} />
+                  Get a free quote now <ChevronRight size={18} />
                 </Link>
               </motion.div>
             </div>
