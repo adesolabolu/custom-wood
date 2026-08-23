@@ -1,5 +1,5 @@
 import React, { useRef, useMemo, useEffect } from 'react';
-import { ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
+import { ChevronRight, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -87,12 +87,9 @@ export function Portfolio() {
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-medium mb-6 text-brand-dark tracking-wide uppercase leading-none">
               OUR WORK
             </h2>
-            <p className="text-brand-dark/80 leading-relaxed mb-8 text-sm md:text-base">
+            <p className="text-brand-dark/80 leading-relaxed text-sm md:text-base">
               Structural integrity meets architectural beauty in our custom woodworking projects. From bespoke kitchens to signature furniture pieces, each creation is handcrafted with exacting precision.
             </p>
-            <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-widest text-brand-brown">
-              <Sparkles size={16} /> Scroll to view showcase
-            </div>
           </div>
 
           {/* 2. Image Showcase Cards with Overlay */}
