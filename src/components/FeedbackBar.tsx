@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Facebook, Instagram, MessageSquare } from 'lucide-react';
+import { Mail, Instagram } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 
 export function FeedbackBar() {
@@ -25,7 +25,7 @@ export function FeedbackBar() {
           className="fixed bottom-0 left-0 w-full z-[200] bg-brand-dark text-brand-light py-2 px-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] text-xs sm:text-sm font-body text-center flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4"
         >
           <div className="flex items-center gap-1.5">
-            <span>Custom Demo Concept by <strong>aB Labs</strong>.</span>
+            <span>Custom Demo Concept by <a href="https://ab-labs.vercel.app/" target="_blank" rel="noopener noreferrer" className="font-bold underline decoration-brand-gold/50 underline-offset-2 hover:decoration-brand-gold hover:text-brand-gold transition-colors" title="View Portfolio">aB Labs</a>.</span>
             <span className="hidden md:inline">Like this design? Let's launch it!</span>
           </div>
           
@@ -38,24 +38,6 @@ export function FeedbackBar() {
               <Mail size={14} />
               <span className="hidden sm:inline">Contact Me</span>
               <span className="sm:hidden">Email</span>
-            </a>
-
-            <a 
-              href="sms:+13157906716" 
-              className="inline-flex items-center justify-center text-brand-gold hover:text-white transition-colors bg-white/5 hover:bg-white/10 w-8 h-8 rounded-full"
-              title="Text us: +13157906716"
-            >
-              <MessageSquare size={14} />
-            </a>
-
-            <a 
-              href="https://www.facebook.com/peakclipped" 
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center text-brand-gold hover:text-white transition-colors bg-white/5 hover:bg-white/10 w-8 h-8 rounded-full"
-              title="Facebook"
-            >
-              <Facebook size={14} />
             </a>
 
             <a 
